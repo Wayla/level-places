@@ -1,0 +1,32 @@
+{
+  "name": "level-places",
+  "description": "Store and retrieve places near a lat/long pair, using leveldb",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/juliangruber/level-places.git"
+  },
+  "homepage": "https://github.com/juliangruber/level-places",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "dependencies": {
+    "geohash": "0.0.1",
+    "through": "~2.3.4",
+    "shutup": "0.0.1"
+  },
+  "devDependencies": {
+    "tape": "~1.0.4",
+    "level-test": "~1.4.0"
+  },
+  "keywords": [
+    "places", "geolocation", "geohash", "leveldb"
+  ],
+  "author": {
+    "name": "Julian Gruber",
+    "email": "julian@wayla.com",
+    "url": "http://wayla.com"
+  },
+  "license": "MIT"
+}
