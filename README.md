@@ -50,7 +50,8 @@ its database using those queues one after another:
 
 Every place that is found and hasn't already been emitted will be. So, places
 are stored redundantly under those segments of their geohash. When a limit
-is given and it is reached, `level-store` stops going further down the list.
+is given and it is reached, or you call `stream.end()`, `level-store` stops
+going further down the list.
 
 ## API
 
