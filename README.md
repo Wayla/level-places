@@ -30,8 +30,8 @@ Lat/long pairs are serialized into
 efficiently this makes use of the fact that geohashes of geographically
 adjacent places start with the same characters, so they sort well.
 
-When querying for `(47.8800, 10.6225)`/`u0x83sr14nyj`, `level-places` queries
-its database using those keys:
+When finding places near `(47.8800, 10.6225)`/`u0x83sr14nyj`, `level-places` queries
+its database using those queues one after another:
 
 * `u0x83sr14nyj`
 * `u0x83sr14ny`
@@ -46,7 +46,8 @@ its database using those keys:
 * `u`
 * ``
 
-So, every place is stored redundantly under each of those keys. When a limit
+Every place that is found and hasn't already been emitted will be. So, places
+are stored redundantly under those segments of their geohash. When a limit
 is given and it is reached, `level-store` stops going further down the list.
 
 ## API
