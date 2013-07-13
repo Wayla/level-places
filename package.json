@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/juliangruber/level-places.git"
+    "url": "git://github.com/Wayla/level-places.git"
   },
-  "homepage": "https://github.com/juliangruber/level-places",
+  "homepage": "https://github.com/Wayla/level-places",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
