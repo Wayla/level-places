@@ -48,6 +48,8 @@ its database using those queues one after another:
 * `u`
 * ``
 
+Additionally a random string is appended to allow multiple places per key.
+
 Every place that is found and hasn't already been emitted will be. So, places
 are stored redundantly under those segments of their geohash. When a limit
 is given and it is reached, or you call `stream.end()`, `level-store` stops
