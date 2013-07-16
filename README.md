@@ -6,6 +6,8 @@ Store and retrieve places near a lat/long pair, using
 
 [![build status](https://secure.travis-ci.org/Wayla/level-places.png)](http://travis-ci.org/Wayla/level-places)
 
+[![testling badge](https://ci.testling.com/Wayla/level-places.png)](https://ci.testling.com/Wayla/level-places)
+
 ## Usage
 
 Given a location, get all the nearby places, starting with the nearest one:
