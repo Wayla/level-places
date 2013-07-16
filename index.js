@@ -1,5 +1,5 @@
 var through = require('through');
-var geohash = require('geohash').GeoHash.encodeGeoHash;
+var geohash = require('geo-hash').encode;
 var shutup = require('shutup');
 
 module.exports = Places;

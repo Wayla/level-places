@@ -12,16 +12,19 @@
     "test": "tape test/*.js"
   },
   "dependencies": {
-    "geohash": "0.0.1",
     "through": "~2.3.4",
-    "shutup": "0.0.1"
+    "shutup": "0.0.1",
+    "geo-hash": "0.0.0"
   },
   "devDependencies": {
     "tape": "~1.0.4",
     "level-test": "~1.4.0"
   },
   "keywords": [
-    "places", "geolocation", "geohash", "leveldb"
+    "places",
+    "geolocation",
+    "geohash",
+    "leveldb"
   ],
   "author": {
     "name": "Julian Gruber",
