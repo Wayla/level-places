@@ -1,65 +1,36 @@
+var Trie = require('level-trie');
+var sublevel = require('level-sublevel');
 var through = require('through');
 var geohash = require('geo-hash').encode;
-var shutup = require('shutup');
+var ordered = require('ordered-through');
 
 module.exports = Places;
 
 function Places (db) {
   if (!(this instanceof Places)) return new Places(db);
-  this.db = db;
+  sublevel(db);
+  this.data = db.sublevel('data');
+  this.trie = Trie(db.sublevel('trie'));
 }
 
 Places.prototype.add = function (data, lat, lon, fn) {
-  var hash = geohash(lat, lon);
   var rand = Math.random().toString(16).slice(2);
-  // todo: use monotonic-timestamp
+  var hash = geohash(lat, lon) + rand;
+  var trie = this.trie;
 
-  this.db.batch(hash.split('').map(function (_, i) {
-    return {
-      type: 'put',
-      key: hash.substr(0, i+1) + '!' + rand,
-      valueEncoding: 'json',
-      value: {
-        hash: hash + rand,
-        data: data
-      }
-    };
-  }), fn);
+  this.data.put(hash, data, { valueEncoding: 'json' }, function (err) {
+    if (err) return fn && fn(err);
+    trie.add(hash, fn);
+  });
 };
 
 Places.prototype.createReadStream = function (lat, lon, opts) {
-  if (!opts) opts = {};
-
-  var db = this.db;
-  var found = [];
-  var limit = typeof opts.limit != 'undefined'? opts.limit : Infinity;
-  var outer = shutup(through());
-  // todo: use pull-streams
-
-  function read (hash) {
-    var vs = db.createValueStream({ start: hash, valueEncoding: 'json' });
-    var inner = through(write, end);
-
-    function write (val) {
-      if (found.indexOf(val.hash) != -1) return;
-      found.push(val.hash);
-      inner.queue(val.data);
-      if (found.length == limit) vs.destroy();
-    }
-    function end () {
-      hash.length > 0 && found.length < limit
-        ? read(hash.substr(0, hash.length - 1))
-        : outer.end();
-    }
-
-    vs.pipe(inner).pipe(outer, { end: false });
-  }
-  
-  process.nextTick(function () {
-    read(geohash(lat, lon));
-    // todo: or use setImmediate
+  var data = this.data;
+  var search = this.trie.createSearchStream(geohash(lat, lon), opts)
+  var get = ordered(function (str, cb) {
+    data.get(str, { valueEncoding: 'json' }, cb);
   });
-
-  return outer;
+  
+  return search.pipe(get);
 };
 
