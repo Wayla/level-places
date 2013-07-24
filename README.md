@@ -69,10 +69,14 @@ If you want to store other data in `db`, use
 subsection of your database.
 
 ### Places#add(place, latitude, longitude[, fn])
+### Places#add(place, { latitude, longitude }[, fn])
 
 Add `place` to the given lat/long pair. `place` can be of any type that
 `JSON.stringify` accepts. Optionally call `fn` as soon as the place was
 saved to the db.
+
+Instead of passing latitude and longitude as seperate arguments you can also
+pass an object containing both.
 
 ### Places#createReadStream(latitude, longitude[, options])
 

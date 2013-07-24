@@ -14,6 +14,12 @@ function Places (db) {
 }
 
 Places.prototype.add = function (data, lat, lon, fn) {
+  if (typeof lat == 'object') {
+    fn = lon;
+    lon = lon in lat? lat.lon : lat.longitude;
+    lat = lat in lat? lat.lat : lat.latitude;
+  }
+
   var rand = Math.random().toString(16).slice(2);
   var hash = geohash(lat, lon) + rand;
   var trie = this.trie;
@@ -26,7 +32,7 @@ Places.prototype.add = function (data, lat, lon, fn) {
 
 Places.prototype.createReadStream = function (lat, lon, opts) {
   var data = this.data;
-  var search = this.trie.createSearchStream(geohash(lat, lon), opts)
+  var search = this.trie.createSearchStream(geohash(lat, lon), opts);
   var get = ordered(function (str, cb) {
     data.get(str, { valueEncoding: 'json' }, cb);
   });
