@@ -1,7 +1,7 @@
 {
   "name": "level-places",
   "description": "Store and retrieve places near a lat/long pair, using leveldb",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/Wayla/level-places.git"
