@@ -15,7 +15,7 @@
     "through": "~2.3.4",
     "shutup": "0.0.1",
     "geo-hash": "0.0.0",
-    "level-trie": "~2.0.1",
+    "level-trie": "~2.0.2",
     "level-sublevel": "~4.8.0",
     "ordered-through": "0.0.3"
   },
