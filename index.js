@@ -3,6 +3,7 @@ var sublevel = require('level-sublevel');
 var through = require('through');
 var geohash = require('geo-hash').encode;
 var ordered = require('ordered-through');
+var throughout = require('throughout');
 
 module.exports = Places;
 
@@ -36,8 +37,9 @@ Places.prototype.createReadStream = function (lat, lon, opts) {
   var get = ordered(function (str, cb) {
     data.get(str, { valueEncoding: 'json' }, cb);
   });
-  get.writable = false;
-  
-  return search.pipe(get);
+
+  var tr = throughout(search, get);
+  tr.writable = false;
+  return tr;
 };
 
