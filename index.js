@@ -36,6 +36,7 @@ Places.prototype.createReadStream = function (lat, lon, opts) {
   var get = ordered(function (str, cb) {
     data.get(str, { valueEncoding: 'json' }, cb);
   });
+  get.writable = false;
   
   return search.pipe(get);
 };
