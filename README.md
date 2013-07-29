@@ -79,9 +79,13 @@ Instead of passing latitude and longitude as seperate arguments you can also
 pass an object containing both.
 
 ### Places#createReadStream(latitude, longitude[, options])
+### Places#createReadStream({ latitude, longitude }[, options])
 
 Create a readable stream that emits places around the provided lat/long pair,
 starting with the nearest one.
+
+Instead of passing latitude and longitude as seperate arguments you can also
+pass an object containing both.
 
 Possible options are:
 
