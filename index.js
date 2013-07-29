@@ -1,7 +1,9 @@
 var Trie = require('level-trie');
 var sublevel = require('level-sublevel');
 var through = require('through');
-var geohash = require('geo-hash').encode;
+var geohash = require('geo-hash');
+var encode = geohash.encode;
+var decode = geohash.decode;
 var ordered = require('ordered-through');
 var throughout = require('throughout');
 
@@ -22,7 +24,7 @@ Places.prototype.add = function (data, lat, lon, fn) {
   }
 
   var rand = Math.random().toString(16).slice(2);
-  var hash = geohash(lat, lon) + rand;
+  var hash = encode(lat, lon) + rand;
   var trie = this.trie;
 
   this.data.put(hash, data, { valueEncoding: 'json' }, function (err) {
@@ -32,10 +34,29 @@ Places.prototype.add = function (data, lat, lon, fn) {
 };
 
 Places.prototype.createReadStream = function (lat, lon, opts) {
+  opts = opts || {};
+
   var data = this.data;
-  var search = this.trie.createSearchStream(geohash(lat, lon), opts);
-  var get = ordered(function (str, cb) {
-    data.get(str, { valueEncoding: 'json' }, cb);
+  var search = this.trie.createSearchStream(encode(lat, lon), opts);
+
+  var get = ordered(function (key, cb) {
+    data.get(key, { valueEncoding: 'json' }, function (err, name) {
+      if (err) {
+        cb(err);
+      } else if (!opts.position) {
+        cb(null, name);
+      } else {
+        var hash = key.substring(0, 12);
+        var position = decode(hash);
+        cb(null, {
+          name: name,
+          position: {
+            latitude: position.lat,
+            longitude: position.lon
+          }
+        }); 
+      }
+    });
   });
 
   var tr = throughout(search, get);
