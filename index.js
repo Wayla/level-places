@@ -34,6 +34,11 @@ Places.prototype.add = function (data, lat, lon, fn) {
 };
 
 Places.prototype.createReadStream = function (lat, lon, opts) {
+  if (typeof lat == 'object') {
+    opts = lon;
+    lon = lat.longitude;
+    lat = lat.latitude;
+  }
   opts = opts || {};
 
   var data = this.data;
