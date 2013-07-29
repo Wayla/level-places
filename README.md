@@ -86,6 +86,8 @@ starting with the nearest one.
 Possible options are:
 
 * limit: Limit the result set to x places.
+* position: If true, instead of place names, an object with `{name, position}`
+will be emitted.
 
 ## Installation
 
