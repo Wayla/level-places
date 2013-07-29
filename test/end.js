@@ -3,7 +3,7 @@ var Places = require('..');
 var test = require('tape');
 var through = require('through');
 
-test('destroy', function (t) {
+test('end', function (t) {
   t.plan(1);
   var places = Places(level());
 
@@ -16,7 +16,7 @@ test('destroy', function (t) {
 
   function write (place) {
     res.push(place);
-    if (res.length > 0) rs.end();
+    rs.end();
   }
   function end () { t.deepEqual(res, ['Kaufbeuren']) }
 });
