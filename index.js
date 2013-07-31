@@ -6,6 +6,7 @@ var encode = geohash.encode;
 var decode = geohash.decode;
 var ordered = require('ordered-through');
 var throughout = require('throughout');
+var shutup = require('shutup');
 
 module.exports = Places;
 
@@ -13,7 +14,7 @@ function Places (db) {
   if (!(this instanceof Places)) return new Places(db);
   sublevel(db);
   this.data = db.sublevel('data');
-  this.trie = Trie(db.sublevel('trie'));
+  this.trie = Trie(shutup(db.sublevel('trie')));
 }
 
 Places.prototype.add = function (data, lat, lon, fn) {
