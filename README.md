@@ -89,9 +89,10 @@ pass an object containing both.
 
 Possible options are:
 
-* limit: Limit the result set to x places.
 * position: If true, instead of place names, an object with `{name, position}`
-will be emitted.
+will be emitted
+* plus all the options for
+[trie#createSearchStream](https://github.com/juliangruber/level-trie#triecreatesearchstreamstring-options)
 
 ## Installation
 
