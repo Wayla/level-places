@@ -79,6 +79,7 @@ Instead of passing latitude and longitude as seperate arguments you can also
 pass an object containing both.
 
 ### Places#remove(place, latitude, longitude[, fn])
+### Places#remove(place, { latitude, longitude }[, fn])
 
 Given a place's `data`, `latitude` and `longitude`, remove it from the database.
 
