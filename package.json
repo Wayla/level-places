@@ -15,10 +15,12 @@
     "through": "~2.3.4",
     "shutup": "0.0.1",
     "geo-hash": "0.0.0",
-    "level-trie": "~2.1.0",
+    "level-trie": "~2.2.0",
     "level-sublevel": "~4.8.0",
     "ordered-through": "0.0.3",
-    "throughout": "~0.0.0"
+    "throughout": "~0.0.0",
+    "deep-equal": "0.0.0",
+    "once": "~1.1.1"
   },
   "devDependencies": {
     "tape": "~1.0.4",
