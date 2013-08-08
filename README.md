@@ -37,18 +37,18 @@ adjacent places start with the same characters, so they sort well.
 When finding places near `(47.8800, 10.6225)`/`u0x83sr14nyj`, `level-places` queries
 its database using those queues one after another:
 
-* `u0x83sr14nyj`
-* `u0x83sr14ny`
-* `u0x83sr14n`
-* `u0x83sr14`
-* `u0x83sr1`
-* `u0x83sr`
-* `u0x83s`
-* `u0x8`
-* `u0x`
-* `u0`
-* `u`
-* ``
+* `"u0x83sr14nyj"`
+* `"u0x83sr14ny"`
+* `"u0x83sr14n"`
+* `"u0x83sr14"`
+* `"u0x83sr1"`
+* `"u0x83sr"`
+* `"u0x83s"`
+* `"u0x8"`
+* `"u0x"`
+* `"u0"`
+* `"u"`
+* `""`
 
 Additionally a random string is appended to allow multiple places per key.
 
